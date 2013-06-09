@@ -1,0 +1,113 @@
+<?php
+// +-----------------------------------------------------------------+
+// | MIOLO - Miolo Development Team - UNIVATES Centro Universitário  |
+// +-----------------------------------------------------------------+
+// | CopyLeft (L) 2001-2002 UNIVATES, Lajeado/RS - Brasil            |
+// +-----------------------------------------------------------------+
+// | Licensed under GPL: see COPYING.TXT or FSF at www.fsf.org for   |
+// |                     further details                             |
+// |                                                                 |
+// | Site: http://miolo.codigolivre.org.br                           |
+// | E-mail: vgartner@univates.br                                    |
+// |         ts@interact2000.com.br                                  |
+// +-----------------------------------------------------------------+
+// | Abstract: This file contains the statusbar elements definitions |
+// |                                                                 |
+// | Created: 2001/08/14 Vilson Cristiano Gärtner,                   |
+// |                     Thomas Spriestersbach                       |
+// |                                                                 |
+// | History: Initial Revision                                       |
+// +-----------------------------------------------------------------+
+
+class MStatusBar extends MControl
+{
+    var $cols;
+
+    function __construct($cols = null)
+    {
+	    global $MIOLO;
+        parent::__construct();
+        $this->AddStyleFile('m_themeelement.css');
+		
+		$this->page->addJsCode('
+			var timeout = '. ($this->manager->getConf('session.timeout') * 60 - 1) .';
+			
+			var toMMSS = function(value){
+				var ss = value % 60;
+				
+				if(ss == 0 || Math.round(value / 60) == 0)
+					var mm = Math.round(value / 60);
+				else
+					var mm = Math.round(value / 60) - 1;
+				
+				return (mm < 10 ? "0"+mm : mm) + ":" + (ss < 10 ? "0"+ss : ss );
+			}
+			
+			var interval = window.setInterval(function(){
+				var text = document.getElementById("sessaotimer");
+				text.innerHTML = "Tempo de sessão: "+toMMSS(timeout);
+				
+				if(timeout != 0)
+					timeout--;
+				else
+				{
+					window.clearInterval(interval);
+					text.style.color = "#f00";
+					alert("A sessão expirou!");
+				}
+			},1000);
+		');
+		
+        $this->cols = $cols;
+
+        $login = $this->manager->GetLogin();
+
+        if ($login)
+        {
+	        // Pega o setor que o usuário pertence
+        	$user = $MIOLO->getBusiness('common','usuario');		
+        	$user->getById($login->idkey);					
+			$setor = $MIOLO->getBusiness('common','setor');
+			$setor->getById($user->idSetor);
+		
+	    $versao = $MIOLO->GetConf('version.sequence');
+            $online = (time() - $login->time) / 60;
+            $this->AddInfo('Usuário:' . ' ' . $login->id);
+	    	$this->AddInfo('Setor:' . ' ' . $setor->sigla);
+            $this->AddInfo('Entrada às:' . ' ' . Date('H:i', $login->time) . ' (' . sprintf('%02d:%02d', $online / 60, $online % 60) . ')');
+            $this->AddInfo('Data:' . ' ' . Date('d/m/Y', $login->time));
+            $this->AddInfo('Versão:' . ' ' . $versao);
+			$this->AddInfo('<span id="sessaotimer">Tempo de sessão: '. $this->manager->getConf('session.timeout') .':00 </span>');
+
+        }
+        else
+        {
+           // $this->AddInfo('Usuário: -');
+           // $this->AddInfo('Entrada às: --:--');
+           // $this->AddInfo('Data: --/--/----');
+        }
+
+//        $this->AddInfo(MIOLO_VERSION);
+//        $this->AddInfo(MIOLO_AUTHOR);
+    }
+
+    function AddInfo($info)
+    {
+        $this->cols[] = $info;
+    }
+
+    function Clear()
+    {
+        unset($this->cols);
+    }
+
+    function Generate()
+    {
+        $ul = new MUnOrderedList();
+        $ul->AddOptions($this->cols);
+        $div = new MDiv('', $ul, 'm-statusbar');
+        return $div->Generate();
+    }
+}
+
+?>

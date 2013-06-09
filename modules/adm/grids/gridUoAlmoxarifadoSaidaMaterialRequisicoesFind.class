@@ -1,0 +1,98 @@
+
+<?php
+/* Copyright 2006, 2007, 2008, 2009, 2010 do SETEC/MEC
+ *
+ * Este arquivo é parte do programa SigaEPT
+ *
+ * O SigaEPT é um software livre;  você pode redistribuí-lo e/ou modificá-lo dentro dos
+ * termos da Licença Pública Geral GNU como publicada pela fundação do software livre (FSF);
+ * na versão 2 da Licença.
+ *
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA GARANTIA; sem
+ * uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou APLICAÇÃO EM PARTICULAR. Veja Licença
+ * Pública Geral GNU/GPL em português para maiores detalhes.
+ *
+ * Você deve ter recebido uma cópia da Licença Pública Geral GNU, sob o título “LICENCA.txt”,
+ * junto com este programa, se não, acesse o portal do Software Público Brasileiro no endereço
+ * www.softwarepublico.gov.br ou escreva para Fundação do Software Livre (FSF) Inc.,51 Franklin
+ * St, Fifth Floor, Boston, MA 02110-1301, USA
+ */
+?>
+
+<?php
+class gridUoAlmoxarifadoSaidaMaterialRequisicoesFind extends MDataGrid
+{
+    protected $uoalmoxarifado;
+    function __construct($objUo)
+    {
+        global $MIOLO, $self;
+        $this->uoalmoxarifado = $objUo;
+		//var_dump($objUo->idUo); //Id da UO de almoxarifado
+		
+		$this->setTitle('Resultados encontrados-');
+        $href = $MIOLO->getActionURL('adm','main:uoalmoxarifado',
+		            $this->uoalmoxarifado->idUo,array('form'=>'saidamaterial','idRequisicao'=>'#0#'));
+		
+		$idRequisicao = Form::getFormValue('idRequisicao');
+        $requisitante = Form::getFormValue('requisitante');
+		$ordenacao    = Form::getFormValue('ordenacao');
+		
+		if (empty($ordenacao)) { $ordenacao = 'data';}
+		
+		if ($ordenacao == 'data') { $ordemBy = 'dataHoraReq, siglaInstituicaoReq, Requisitante, usuarioreq';}
+			else if ($ordenacao == 'setor') { $ordemBy = 'siglaInstituicaoReq, Requisitante, usuarioreq';}
+			else if ($ordenacao == 'id') { $ordemBy = 'idRequisicao';}
+		 
+		//'siglaInstituicaoReq, Requisitante, usuarioreq' //ordenacao
+		
+		/*if (empty($ordenacao)) {$ordenacao = 'data';}		
+				
+		echo('<pre>');
+		var_dump($idRequisicao, $requisitante, $ordenacao);
+		echo('</pre>');*/
+		
+		$columns = array(			
+			new MDataGridHyperlink('idRequisicao'     ,'ID Requisição'          ,$href, '10%'),		
+			new MDataGridColumn('dataHora'            ,'Data/Hora requisição'   ,'center',   false,'25%'),
+			new MDataGridColumn('siglainstituicaoreq' ,'Instituicão'            ,'center',   true, '15%'),
+			new MDataGridColumn('requisitante'        ,'Setor requisitante'     ,'center',   true, '20%'),
+			new MDataGridHyperlink('usuarioreq'       ,'Usuário requisitante'   ,$href, '30%'),			
+		);
+
+		$sql = new sql("idRequisicao, iduoexec, executora, siglainstituicaoreq, requisitante, usuarioreq, DataHora",
+		                'V_AdRequisicoesSaidaMaterial', //$tables
+						'idUoExec = ' . $objUo->idUo, // where 
+						$ordemBy //ordenacao
+						);
+		
+		if (  !empty($idRequisicao) ) { $sql->where .= ' AND idRequisicao = ' . $idRequisicao; }
+		
+		if (  !empty($requisitante) ) { $sql->where .= " AND usuarioreq LIKE '%" . $requisitante . "%'" ;}
+
+		//var_dump($sql->where);		
+
+		$href_grid = $MIOLO->getActionURL('adm','main:uoalmoxarifado',$this->uoalmoxarifado->idUo,array('form'=>'saidamaterial'));
+		
+		/*echo('<pre>');
+		var_dump ($href_grid);
+		echo('</pre>');*/
+		
+		$aux = $MIOLO->getBusiness('adm', 'executoralmox');
+		$query = $aux->Query($sql);	
+		
+		/*echo('<pre>');
+		var_dump($query->result[0][0], $query->result[0][1], $query->result[0][3], $query->result[0][4]);
+		echo('</pre>');*/
+		
+		//$href_grid = $MIOLO->GetActionURL('adm',$self);			
+		
+        parent::__construct($query, $columns, $href_grid, 60, 0, 'gridUoAlmoxarifadoSaidaMaterialRequisicoesFind');
+		//$this->AddActionSelect();
+		//$this->SetLinkType('hyperlink');
+        //$href = $this->manager->GetActionURL('adm','main:empenho:new','', array('idEmpenho'=>'$id') );
+		
+		
+		
+    }
+	
+}
