@@ -1,21 +1,21 @@
 <?php
 /* Copyright 2006, 2007, 2008, 2009, 2010 do SETEC/MEC
  *
-* Este arquivo é parte do programa SigaEPT
-*
-* O SigaEPT é um software livre;  você pode redistribuí-lo e/ou modificá-lo dentro dos
-* termos da Licença Pública Geral GNU como publicada pela fundação do software livre (FSF);
-* na versão 2 da Licença.
-*
-* Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA GARANTIA; sem
-* uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou APLICAÇÃO EM PARTICULAR. Veja Licença
-* Pública Geral GNU/GPL em português para maiores detalhes.
-*
-* Você deve ter recebido uma cópia da Licença Pública Geral GNU, sob o título “LICENCA.txt”,
-* junto com este programa, se não, acesse o portal do Software Público Brasileiro no endereço
-* www.softwarepublico.gov.br ou escreva para Fundação do Software Livre (FSF) Inc.,51 Franklin
-* St, Fifth Floor, Boston, MA 02110-1301, USA
-*/
+ * Este arquivo é parte do programa SigaEPT
+ *
+ * O SigaEPT é um software livre;  você pode redistribuí-lo e/ou modificá-lo dentro dos
+ * termos da Licença Pública Geral GNU como publicada pela fundação do software livre (FSF);
+ * na versão 2 da Licença.
+ *
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA GARANTIA; sem
+ * uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou APLICAÇÃO EM PARTICULAR. Veja Licença
+ * Pública Geral GNU/GPL em português para maiores detalhes.
+ *
+ * Você deve ter recebido uma cópia da Licença Pública Geral GNU, sob o título “LICENCA.txt”,
+ * junto com este programa, se não, acesse o portal do Software Público Brasileiro no endereço
+ * www.softwarepublico.gov.br ou escreva para Fundação do Software Livre (FSF) Inc.,51 Franklin
+ * St, Fifth Floor, Boston, MA 02110-1301, USA
+ */
 ?>
 <?php
 /**
@@ -261,7 +261,7 @@ class BusinessBibliotecaObra extends Business
 		// //Busca a 1° ocorrencia do Autor Secundário
 		$sql = new sql('conteudo','bt_material','(idetiqueta = 154) and (idobra=?)  and (ocorrencia=2)');
 		$query = $this->Query($sql,$idobra);
-			
+
 		// return $query->result[0][0];
 		return $query->fields('conteudo');
 
@@ -273,7 +273,7 @@ class BusinessBibliotecaObra extends Business
 
 		$sql = new sql('conteudo','bt_material','(idetiqueta = 154) and (idobra=?)  and (ocorrencia=2)');
 		$query = $this->Query($sql,$idobra);
-			
+
 		// return $query->result[0][0];
 		return $query->fields('conteudo');
 
@@ -287,7 +287,7 @@ class BusinessBibliotecaObra extends Business
 
 		$sql = new sql('conteudo','bt_material','(idetiqueta = 154) and (idobra=?)  and (ocorrencia=3)');
 		$query = $this->Query($sql,$idobra);
-			
+
 		// return $query->result[0][0];
 		return $query->fields('conteudo');
 
@@ -300,7 +300,7 @@ class BusinessBibliotecaObra extends Business
 	{
 		$sql = new sql('conteudo','bt_material','((idetiqueta>= 140 and idetiqueta<=148)) and (idobra=?)  ');
 		$query = $this->Query($sql,$idobra);
-			
+
 		// return $query->result[0][0];   m.idetiqueta>=140 and m.idetiqueta<=148
 		return $query->result;
 
@@ -311,7 +311,7 @@ class BusinessBibliotecaObra extends Business
 	{
 		$sql = new sql('conteudo','bt_material','((idetiqueta>= 140 and idetiqueta<=148)) and (idobra=?)  and (ocorrencia=2)');
 		$query = $this->Query($sql,$idobra);
-			
+
 		// return $query->result[0][0];   m.idetiqueta>=140 and m.idetiqueta<=148
 		return $query->fields('conteudo');
 
@@ -701,7 +701,7 @@ class BusinessBibliotecaObra extends Business
 			//             }
 
 			/*  Nenhum desses possui  coluna correspondente em bt_obra:
-			 //ISBN
+			//ISBN
 			elseif (($etiqueta->tag == '020') && ($subcampo == 'a'))
 			{
 			$field = 'isbn';
@@ -716,7 +716,7 @@ class BusinessBibliotecaObra extends Business
 			{
 			$field = 'assunto';
 			}
-			*/
+			 */
 
 
 			if (($field != '') and ($field != 'idautor'))
@@ -1075,12 +1075,12 @@ class BusinessBibliotecaObra extends Business
 			$obra->saveSubFicha(date("YmdHms"), '005');
 			//rever 19/05/2010
 			/*  if ($data->descAutorSec <> null){
-			 $objEtiqueta->GetByTag('154');
-			$obra->saveMaterial($objEtiqueta->idEtiqueta, $ocorrencia, 'a', $linha, $data->descAutorSec);
-			}
-			$data->keytipo = $this->GetFieldValue('selClass');
-			$data->cddcdu = trim($this->objSimples->$this->GetFieldValue('edtCddCdu'));
-			*/
+				$objEtiqueta->GetByTag('154');
+				$obra->saveMaterial($objEtiqueta->idEtiqueta, $ocorrencia, 'a', $linha, $data->descAutorSec);
+				}
+				$data->keytipo = $this->GetFieldValue('selClass');
+				$data->cddcdu = trim($this->objSimples->$this->GetFieldValue('edtCddCdu'));
+			 */
 		}
 		return $ok;
 	}
@@ -1305,17 +1305,17 @@ class BusinessBibliotecaObra extends Business
 			}
 			//rever 05/2010
 			/*        elseif ($etiqueta->tag == '154')
-			 {
-			$sql = new sql('conteudo','bt_material',"(idobra = ?) and (idetiqueta = '154') and (subcampo = 'a') and (ocorrencia = 2) and (linha = 1)");
-			$descAutorSec = $this->Query($sql,array($this->idObra,$idEtiqueta));
+					  {
+					  $sql = new sql('conteudo','bt_material',"(idobra = ?) and (idetiqueta = '154') and (subcampo = 'a') and (ocorrencia = 2) and (linha = 1)");
+					  $descAutorSec = $this->Query($sql,array($this->idObra,$idEtiqueta));
 
-			$sql = new sql('descAutorSec','bt_obra','(idobra = ?)');
-			$values = array($descAutorSec->result[0][0],$this->idObra);
+					  $sql = new sql('descAutorSec','bt_obra','(idobra = ?)');
+					  $values = array($descAutorSec->result[0][0],$this->idObra);
 
 
-			}
+					  }
 
-			*/
+			 */
 
 
 
@@ -1367,218 +1367,218 @@ class BusinessBibliotecaObra extends Business
 			{
 				$result[0] = ($result[0] == null) ? '<b>' . $q[0] . '</b>' : $result[0] . ', ' . '<b>' . $q[0] . '</b>';
 			}
-			//titulo
-			$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '245') and (subcampo = 'a')");
-			$query = $this->Query($sql,$idobra);
-			if($query->result)
-				foreach($query->result as $q)
+		//titulo
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '245') and (subcampo = 'a')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[1] = ($result[1] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Titulo&tipo=detalhe'>$q[0]</a></b>" : $result[1] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Titulo&tipo=detalhe'>$q[0]</a></b>";
+			}
+
+
+		//subtitulo
+
+
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '245') and (m.subcampo = 'b')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[2] = ($result[2] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Titulo&tipo=detalhe'>$q[0]</a></b>" : $result[2] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Titulo&tipo=detalhe'>$q[0]</a></b>";
+			}
+
+
+		//autor
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag >= '100' and e.tag <= '130')
+				and (m.subcampo = 'a')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[3] = ($result[3] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Autor&tipo=detalhe'>$q[0]</a></b>" : $result[3] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Autor&tipo=detalhe'>$q[0]</a></b>";
+			}
+
+
+
+		//edição
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '250') and (subcampo = 'a')
+				and (m.conteudo <> '1 Ed.')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[4] = ($result[4] == null) ? '<b>' . $q[0] . '</b>' : $result[4] . ', ' . '<b>' . $q[0] . '</b>';
+			}
+		//classificação
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '852') and (subcampo = 'a')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[5] = ($result[5] == null) ? '<b><font color=red>' . $q[0] . '</font></b>' : $result[5] . ', ' . '<b><font color=red>' . $q[0] . '</font></b>';
+			}
+		//notação de autor
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '852') and (subcampo = 'b')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[6] = ($result[6] == null) ? '<b><font color=red>' . $q[0] . '</font></b>' : $result[6] . ', ' . '<b><font color=red>' . $q[0] . '</font></b>';
+			}
+		//notação de titulo
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '852') and (subcampo = 'c')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[7] = ($result[7] == null) ? '<b><font color=red>' . $q[0] . '</font></b>' : $result[7] . ', ' . '<b><font color=red>' . $q[0] . '</font></b>';
+			}
+		//local de publicação
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '260') and (subcampo = 'a')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[8] = ($result[8] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Local&tipo=detalhe'>$q[0]</a></b>" : $result[8] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Local&tipo=detalhe'>$q[0]</a></b>";
+			}
+		//editora
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '260') and (subcampo = 'b')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[9] = ($result[9] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Editora&tipo=detalhe'>$q[0]</a></b>" : $result[9] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Editora&tipo=detalhe'>$q[0]</a></b>";
+			}
+		//data de publicação
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '260') and (subcampo = 'c')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[10] = ($result[10] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Ano&tipo=detalhe'>$q[0]</a></b>" : $result[10] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Ano&tipo=detalhe'>$q[0]</a></b>";
+			}
+		//descrição física
+		// rever sem subcampo $sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '300') and (subcampo = 'a')");
+
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '300') ");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[11] = ($result[11] == null) ? '<b>' . $q[0] . '</b>' : $result[11] . ' ; ' . '<b>' . $q[0] . '</b>';
+				//$result[11] = strtoupper($result[11]);
+
+			}
+		//material complementar
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '300') and (subcampo = 'e')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[12] = ($result[12] == null) ? '<b>' . $q[0] . '</b>' : $result[12] . ', ' . '<b>' . $q[0] . '</b>';
+			}
+		//serie
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '490') and (subcampo = 'a')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[13] = ($result[13] == null) ? '<b>' . $q[0] . '</b>' : $result[13] . ', ' . '<b>' . $q[0] . '</b>';
+			}
+		//numero de volume
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '490') and (subcampo = 'v')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[14] = ($result[14] == null) ? '<b>' . $q[0] . '</b>' : $result[14] . ', ' . '<b>' . $q[0] . '</b>';
+			}
+		//assunto
+		/*
+		   $sql = new sql('distinct(m.conteudo), m.idetiqueta, m.ocorrencia, c.ordem, m.linha', 'bt_material m, bt_etiqueta e, bt_camposubficha c', "(e.idetiqueta = m.idetiqueta) and (m.idetiqueta = c.idetiqueta) and (m.subcampo = c.subcampo) and (m.idobra = ?) and ((e.tag = '650') or (e.tag = '600') or (e.tag = '610') or (e.tag = '611') or (e.tag = '651') or (e.tag = '690') or (e.tag = '630'))", "m.idetiqueta,  m.ocorrencia, c.ordem, m.linha");
+		 */
+
+
+
+
+		$sql = new sql('distinct(m.conteudo), m.idetiqueta, m.ocorrencia, c.ordem, m.linha', 'bt_material m, bt_obra o, bt_genero g, bt_etiqueta e, bt_camposubficha c', "(m.idobra = ?) and (m.idobra = o.idobra) and (o.idgenero = g.idgenero) and (g.idficha = c.idficha) and (c.idetiqueta = m.idetiqueta) and  (c.subcampo = m.subcampo) and (e.idetiqueta = m.idetiqueta) and ((e.tag = '650') or (e.tag = '600') or (e.tag = '610') or (e.tag = '611') or (e.tag = '651') or (e.tag = '690') or (e.tag = '630'))", "m.idetiqueta,  m.ocorrencia, c.ordem, m.linha");
+		$query = $this->Query($sql,$idobra);
+		$r = $query->result;
+		if($r)
+		{
+			$result[15] = '';
+			for($i = 0; $i < count($r); $i++)
+			{
+				$resultado = $r[$i][0];
+				$result[15] .= "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$resultado&campo=Assunto&tipo=detalhe'>$resultado</a></b>";
+				//se o próximo for de etiqueta ou ocorrencia diferentes, quebra linha. senão, concatena.
+				if( ($r[$i+1][1] != $r[$i][1]) or ($r[$i+1][2] != $r[$i][2]) )
 				{
-					$result[1] = ($result[1] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Titulo&tipo=detalhe'>$q[0]</a></b>" : $result[1] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Titulo&tipo=detalhe'>$q[0]</a></b>";
+					$result[15] .= "<BR>";
 				}
-					
-					
-				//subtitulo
+				else
+				{
+					$result[15] .= '     ::    ';
+				}
+			}
+			$result[15] = substr($result[15], 0, -4);
+		}
+		//entrada secundaria
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '700') and (subcampo = 'a')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[16] = ($result[16] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Entrada Secundaria&tipo=detalhe'>$q[0]</a></b>" : $result[16] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Entrada Secundaria&tipo=detalhe'>$q[0]</a></b>";
+			}
+
+		//endereco eletronico (campo 856$u
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '856') and (subcampo = 'u')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[17] = ($result[17] == null) ? "<b><a href='$q[0]' target='blank'>$q[0]</a></b>" : $result[17] . ', ' . "<b><a href='$q[0]' target='blank'>$q[0]</a></b>";
+			}
 
 
-				$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '245') and (m.subcampo = 'b')");
-				$query = $this->Query($sql,$idobra);
-				if($query->result)
-					foreach($query->result as $q)
-					{
-						$result[2] = ($result[2] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Titulo&tipo=detalhe'>$q[0]</a></b>" : $result[2] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Titulo&tipo=detalhe'>$q[0]</a></b>";
-					}
+		//ISBN
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '020') and (subcampo = 'a')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[19] = ($result[19] == null) ? '<b>' . $q[0] . '</b>' : $result[19] . ', ' . '<b>' . $q[0] . '</b>';
+			}
 
 
-					//autor
-					$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag >= '100' and e.tag <= '130')
-							and (m.subcampo = 'a')");
-					$query = $this->Query($sql,$idobra);
-					if($query->result)
-						foreach($query->result as $q)
-						{
-							$result[3] = ($result[3] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Autor&tipo=detalhe'>$q[0]</a></b>" : $result[3] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Autor&tipo=detalhe'>$q[0]</a></b>";
-						}
-							
-							
-							
-						//edição
-						$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '250') and (subcampo = 'a')
-								and (m.conteudo <> '1 Ed.')");
-						$query = $this->Query($sql,$idobra);
-						if($query->result)
-							foreach($query->result as $q)
-							{
-								$result[4] = ($result[4] == null) ? '<b>' . $q[0] . '</b>' : $result[4] . ', ' . '<b>' . $q[0] . '</b>';
-							}
-							//classificação
-							$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '852') and (subcampo = 'a')");
-							$query = $this->Query($sql,$idobra);
-							if($query->result)
-								foreach($query->result as $q)
-								{
-									$result[5] = ($result[5] == null) ? '<b><font color=red>' . $q[0] . '</font></b>' : $result[5] . ', ' . '<b><font color=red>' . $q[0] . '</font></b>';
-								}
-								//notação de autor
-								$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '852') and (subcampo = 'b')");
-								$query = $this->Query($sql,$idobra);
-								if($query->result)
-									foreach($query->result as $q)
-									{
-										$result[6] = ($result[6] == null) ? '<b><font color=red>' . $q[0] . '</font></b>' : $result[6] . ', ' . '<b><font color=red>' . $q[0] . '</font></b>';
-									}
-									//notação de titulo
-									$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '852') and (subcampo = 'c')");
-									$query = $this->Query($sql,$idobra);
-									if($query->result)
-										foreach($query->result as $q)
-										{
-											$result[7] = ($result[7] == null) ? '<b><font color=red>' . $q[0] . '</font></b>' : $result[7] . ', ' . '<b><font color=red>' . $q[0] . '</font></b>';
-										}
-										//local de publicação
-										$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '260') and (subcampo = 'a')");
-										$query = $this->Query($sql,$idobra);
-										if($query->result)
-											foreach($query->result as $q)
-											{
-												$result[8] = ($result[8] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Local&tipo=detalhe'>$q[0]</a></b>" : $result[8] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Local&tipo=detalhe'>$q[0]</a></b>";
-											}
-											//editora
-											$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '260') and (subcampo = 'b')");
-											$query = $this->Query($sql,$idobra);
-											if($query->result)
-												foreach($query->result as $q)
-												{
-													$result[9] = ($result[9] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Editora&tipo=detalhe'>$q[0]</a></b>" : $result[9] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Editora&tipo=detalhe'>$q[0]</a></b>";
-												}
-												//data de publicação
-												$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '260') and (subcampo = 'c')");
-												$query = $this->Query($sql,$idobra);
-												if($query->result)
-													foreach($query->result as $q)
-													{
-														$result[10] = ($result[10] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Ano&tipo=detalhe'>$q[0]</a></b>" : $result[10] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Ano&tipo=detalhe'>$q[0]</a></b>";
-													}
-													//descrição física
-													// rever sem subcampo $sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '300') and (subcampo = 'a')");
+		//Cuuter do autor
+		//		$sql = new sql(' distinct(a.cutter)  as cutter', 'bt_material m, bt_autor a , bt_obra o'  , "(o.idobra = m.idobra) and (o.idautor = a.idautor) and(m.idobra = ?)  and a.subcampo ='a'");
 
-													$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '300') ");
-													$query = $this->Query($sql,$idobra);
-													if($query->result)
-														foreach($query->result as $q)
-														{
-															$result[11] = ($result[11] == null) ? '<b>' . $q[0] . '</b>' : $result[11] . ' ; ' . '<b>' . $q[0] . '</b>';
-															//$result[11] = strtoupper($result[11]);
-
-														}
-														//material complementar
-														$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '300') and (subcampo = 'e')");
-														$query = $this->Query($sql,$idobra);
-														if($query->result)
-															foreach($query->result as $q)
-															{
-																$result[12] = ($result[12] == null) ? '<b>' . $q[0] . '</b>' : $result[12] . ', ' . '<b>' . $q[0] . '</b>';
-															}
-															//serie
-															$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '490') and (subcampo = 'a')");
-															$query = $this->Query($sql,$idobra);
-															if($query->result)
-																foreach($query->result as $q)
-																{
-																	$result[13] = ($result[13] == null) ? '<b>' . $q[0] . '</b>' : $result[13] . ', ' . '<b>' . $q[0] . '</b>';
-																}
-																//numero de volume
-																$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '490') and (subcampo = 'v')");
-																$query = $this->Query($sql,$idobra);
-																if($query->result)
-																	foreach($query->result as $q)
-																	{
-																		$result[14] = ($result[14] == null) ? '<b>' . $q[0] . '</b>' : $result[14] . ', ' . '<b>' . $q[0] . '</b>';
-																	}
-																	//assunto
-																	/*
-																	 $sql = new sql('distinct(m.conteudo), m.idetiqueta, m.ocorrencia, c.ordem, m.linha', 'bt_material m, bt_etiqueta e, bt_camposubficha c', "(e.idetiqueta = m.idetiqueta) and (m.idetiqueta = c.idetiqueta) and (m.subcampo = c.subcampo) and (m.idobra = ?) and ((e.tag = '650') or (e.tag = '600') or (e.tag = '610') or (e.tag = '611') or (e.tag = '651') or (e.tag = '690') or (e.tag = '630'))", "m.idetiqueta,  m.ocorrencia, c.ordem, m.linha");
-																	*/
+		$sql = new sql('m.conteudo   as cutter', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '090')  ");
 
 
 
-
-																	$sql = new sql('distinct(m.conteudo), m.idetiqueta, m.ocorrencia, c.ordem, m.linha', 'bt_material m, bt_obra o, bt_genero g, bt_etiqueta e, bt_camposubficha c', "(m.idobra = ?) and (m.idobra = o.idobra) and (o.idgenero = g.idgenero) and (g.idficha = c.idficha) and (c.idetiqueta = m.idetiqueta) and  (c.subcampo = m.subcampo) and (e.idetiqueta = m.idetiqueta) and ((e.tag = '650') or (e.tag = '600') or (e.tag = '610') or (e.tag = '611') or (e.tag = '651') or (e.tag = '690') or (e.tag = '630'))", "m.idetiqueta,  m.ocorrencia, c.ordem, m.linha");
-																	$query = $this->Query($sql,$idobra);
-																	$r = $query->result;
-																	if($r)
-																	{
-																		$result[15] = '';
-																		for($i = 0; $i < count($r); $i++)
-																		{
-																			$resultado = $r[$i][0];
-																			$result[15] .= "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$resultado&campo=Assunto&tipo=detalhe'>$resultado</a></b>";
-																			//se o próximo for de etiqueta ou ocorrencia diferentes, quebra linha. senão, concatena.
-																			if( ($r[$i+1][1] != $r[$i][1]) or ($r[$i+1][2] != $r[$i][2]) )
-																			{
-																				$result[15] .= "<BR>";
-																			}
-																			else
-																			{
-																				$result[15] .= '     ::    ';
-																			}
-																		}
-																		$result[15] = substr($result[15], 0, -4);
-																	}
-																	//entrada secundaria
-																	$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '700') and (subcampo = 'a')");
-																	$query = $this->Query($sql,$idobra);
-																	if($query->result)
-																		foreach($query->result as $q)
-																		{
-																			$result[16] = ($result[16] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Entrada Secundaria&tipo=detalhe'>$q[0]</a></b>" : $result[16] . ', ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Entrada Secundaria&tipo=detalhe'>$q[0]</a></b>";
-																		}
-
-																		//endereco eletronico (campo 856$u
-																		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '856') and (subcampo = 'u')");
-																		$query = $this->Query($sql,$idobra);
-																		if($query->result)
-																			foreach($query->result as $q)
-																			{
-																				$result[17] = ($result[17] == null) ? "<b><a href='$q[0]' target='blank'>$q[0]</a></b>" : $result[17] . ', ' . "<b><a href='$q[0]' target='blank'>$q[0]</a></b>";
-																			}
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[20] = ($result[20] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Cutter&tipo=detalhe'>$q[0]</a></b>" : $result[20] . ' ; ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Cutter&tipo=detalhe'>$q[0]</a></b>";
+			}
 
 
-																			//ISBN
-																			$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '020') and (subcampo = 'a')");
-																			$query = $this->Query($sql,$idobra);
-																			if($query->result)
-																				foreach($query->result as $q)
-																				{
-																					$result[19] = ($result[19] == null) ? '<b>' . $q[0] . '</b>' : $result[19] . ', ' . '<b>' . $q[0] . '</b>';
-																				}
+		//autor  Secundário
+		$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '700')  and (m.subcampo = 'a')");
+		$query = $this->Query($sql,$idobra);
+		if($query->result)
+			foreach($query->result as $q)
+			{
+				$result[18] = ($result[18] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Autor&tipo=detalhe'>$q[0]</a></b>" : $result[18] . ' ; ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Autor&tipo=detalhe'>$q[0]</a></b>";
+			}
 
 
-																				//Cuuter do autor
-																				//		$sql = new sql(' distinct(a.cutter)  as cutter', 'bt_material m, bt_autor a , bt_obra o'  , "(o.idobra = m.idobra) and (o.idautor = a.idautor) and(m.idobra = ?)  and a.subcampo ='a'");
-
-																				$sql = new sql('m.conteudo   as cutter', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '090')  ");
-
-
-
-																				$query = $this->Query($sql,$idobra);
-																				if($query->result)
-																					foreach($query->result as $q)
-																					{
-																						$result[20] = ($result[20] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Cutter&tipo=detalhe'>$q[0]</a></b>" : $result[20] . ' ; ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Cutter&tipo=detalhe'>$q[0]</a></b>";
-																					}
-
-
-																					//autor  Secundário
-																					$sql = new sql('m.conteudo', 'bt_material m, bt_etiqueta e', "(e.idetiqueta = m.idetiqueta) and (m.idobra = ?) and (e.tag = '700')  and (m.subcampo = 'a')");
-																					$query = $this->Query($sql,$idobra);
-																					if($query->result)
-																						foreach($query->result as $q)
-																						{
-																							$result[18] = ($result[18] == null) ? "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Autor&tipo=detalhe'>$q[0]</a></b>" : $result[18] . ' ; ' . "<b><a href='index.php?module=$module&action=main:pesquisasimples&event=PesquisaDetalhada&item=$q[0]&campo=Autor&tipo=detalhe'>$q[0]</a></b>";
-																						}
-																							
-
-																						return $result;
+		return $result;
 	}
 
 	function RelatorioObraPorClasse($ClasseInicio,$ClasseFim)
@@ -1594,6 +1594,34 @@ class BusinessBibliotecaObra extends Business
 		$sql = new sql('u.login,substr(u.nick,1,20) as Operador,count(distinct(substr(l.identificador,1,5))) as Obra', 'bt_logoperacao l, cm_usuario u', 'l.idoperacao='.$Operacao.' AND (l.data >= '.substr($this->_db->CharToTimestamp($dataIni),1).') AND (l.data <= '.substr($this->_db->CharToTimestamp($dataFim),1).') AND l.idusuario = u.idusuario','substr(u.nick,1,20)', 'u.login,substr(u.nick,1,20)');
 		$query = $this->Query($sql);
 		return $query;
+	}
+
+	/**
+	 * Obtém a quantidade de obras e exemplares por Unidade.
+
+	 * @author Daniel Bonfim
+	 * @since 18-06-2013
+	 * 
+	 * @parameter $idgenero integer
+	 * @return array
+	 */
+	function getQtdObrasExemplaresPorUnidade($idGenero = null) {
+		$sql = "
+			u.descricao as unidade, 	
+			count(distinct(o.idobra)) as qtd_obra,
+			count(e.idexemplar) as qtd_exemplares
+
+				FROM
+				bt_unidade u JOIN
+				bt_exemplar e ON (u.idunidade = e.idunidade) JOIN
+				bt_obra o ON (e.idobra = o.idobra) ";
+
+		if(!is_null($idGenero))
+			$sql .= "WHERE o.idgenero = $idGenero ";
+
+		$sql .= "GROUP BY u.descricao";
+
+		$return = $this->Query($sql)->result;
 	}
 
 	function RelatorioObraeExemplaresporUnidade($Genero)
@@ -1722,7 +1750,7 @@ class BusinessBibliotecaObra extends Business
 	function saveIndicadorObra($idObra,$idEtiqueta,$ocorrencia,$indicador,$value,$tag)
 	{
 		global $MIOLO,$module;
-			
+
 		$commands = array();
 		// obter indicador, se existir
 		$sql = new sql('idetiqueta, idobra','bt_indicadores','(idobra = ?) and (idetiqueta = ?)  and (ocorrencia = ?) and (indicador = ?)');
@@ -1754,7 +1782,7 @@ class BusinessBibliotecaObra extends Business
 	function saveAutorMaterial($idObra,$ocorrencia,$linha,$value, $idetiqueta,$idautor){
 		global $MIOLO,$module;
 
-			
+
 		//$objEtiqueta->GetByTag('700');
 		// $idEtiqueta = $objEtiqueta->idEtiqueta;
 		$idEtiqueta = $idetiqueta; //A ETIQUETA VEM DO FORMULARIO
@@ -2203,19 +2231,19 @@ class BusinessBibliotecaObra extends Business
 
 
 				$sql = new sql('distinct(o.numerodaobra) as OBRA,o.titulo , o.idautor, o.edicao, o.localpublicacao as LOCAL, ed.descricao, o.datapublicacao as DATA,
-						count(e.idexemplar) as EX', 'bt_exemplar e, bt_material m, bt_obra o, bt_editora ed',
-						'o.idobra=m.idobra AND (ed.ideditora=o.ideditora) AND o.idobra=m.idobra','o.titulo',
-						'o.numerodaobra, o.titulo, o.idautor, o.edicao, o.localpublicacao,  ed.descricao, o.datapublicacao, m.conteudo');
+				count(e.idexemplar) as EX', 'bt_exemplar e, bt_material m, bt_obra o, bt_editora ed',
+				'o.idobra=m.idobra AND (ed.ideditora=o.ideditora) AND o.idobra=m.idobra','o.titulo',
+				'o.numerodaobra, o.titulo, o.idautor, o.edicao, o.localpublicacao,  ed.descricao, o.datapublicacao, m.conteudo');
 
 
-				*/
+				 */
 
 
 
 				$sql = new sql('distinct(o.numerodaobra) as OBRA,o.titulo ',
-				' bt_material m, bt_obra o   ',
-				'o.idobra=m.idobra ',
-				' o.numerodaobra');
+						' bt_material m, bt_obra o   ',
+						'o.idobra=m.idobra ',
+						' o.numerodaobra');
 
 
 
@@ -2225,10 +2253,10 @@ class BusinessBibliotecaObra extends Business
 			{
 
 				/*
-				 $sql = new sql('o.numerodaobra as OBRA, o.titulo, o.idautor, o.edicao, o.localpublicacao as LOCAL, ed.descricao, o.datapublicacao as DATA, m.conteudo as CLASSIFICACAO, count(e.idexemplar) as EX', 'bt_exemplar e, bt_material m, bt_obra o,bt_editora ed',
-				 		'o.idobra=m.idobra AND m.idetiqueta=189 AND (ed.ideditora=o.ideditora) AND m.subcampo=\'a\' AND o.idobra=e.idobra AND o.idgenero='.$idGenero.'','o.titulo', 'o.numerodaobra, o.titulo, o.idautor, o.edicao, o.localpublicacao,  ed.descricao, o.datapublicacao, m.conteudo');
+				   $sql = new sql('o.numerodaobra as OBRA, o.titulo, o.idautor, o.edicao, o.localpublicacao as LOCAL, ed.descricao, o.datapublicacao as DATA, m.conteudo as CLASSIFICACAO, count(e.idexemplar) as EX', 'bt_exemplar e, bt_material m, bt_obra o,bt_editora ed',
+				   'o.idobra=m.idobra AND m.idetiqueta=189 AND (ed.ideditora=o.ideditora) AND m.subcampo=\'a\' AND o.idobra=e.idobra AND o.idgenero='.$idGenero.'','o.titulo', 'o.numerodaobra, o.titulo, o.idautor, o.edicao, o.localpublicacao,  ed.descricao, o.datapublicacao, m.conteudo');
 
-				*/
+				 */
 
 
 				$sql = new sql('distinct(o.numerodaobra) as OBRA,o.titulo ',
@@ -2252,19 +2280,19 @@ class BusinessBibliotecaObra extends Business
 
 
 			/*
-			 if ($idGenero == 0)
-			 {
-			$sql = new sql('o.numerodaobra as OBRA, o.titulo, o.idautor, o.edicao, o.localpublicacao as LOCAL, ed.descricao, o.datapublicacao as DATA, m.conteudo as CLASSIFICACAO, count(e.idexemplar) as EX', 'bt_exemplar e, bt_material m, bt_obra o,bt_editora ed',
-					'o.idobra=m.idobra AND m.idetiqueta=189 AND (ed.ideditora=o.ideditora) AND m.subcampo=\'a\' AND o.idobra=e.idobra AND e.idunidade='.$idUnidade.'','o.titulo', 'o.numerodaobra, o.titulo, o.idautor, o.edicao, o.localpublicacao,  ed.descricao, o.datapublicacao, m.conteudo');
-			}
-			else
-			{
-			$sql = new sql('o.numerodaobra as OBRA, o.titulo, o.idautor, o.edicao, o.localpublicacao as LOCAL, ed.descricao, o.datapublicacao as DATA, m.conteudo as CLASSIFICACAO, count(e.idexemplar) as EX', 'bt_exemplar e, bt_material m, bt_obra o,bt_editora ed',
-					'o.idobra=m.idobra AND m.idetiqueta=189 AND (ed.ideditora=o.ideditora) AND m.subcampo=\'a\' AND o.idobra=e.idobra AND e.idunidade='.$idUnidade.' AND o.idgenero='.$idGenero.'','o.titulo', 'o.numerodaobra, o.titulo, o.idautor, o.edicao, o.localpublicacao,  ed.descricao, o.datapublicacao, m.conteudo');
+			   if ($idGenero == 0)
+			   {
+			   $sql = new sql('o.numerodaobra as OBRA, o.titulo, o.idautor, o.edicao, o.localpublicacao as LOCAL, ed.descricao, o.datapublicacao as DATA, m.conteudo as CLASSIFICACAO, count(e.idexemplar) as EX', 'bt_exemplar e, bt_material m, bt_obra o,bt_editora ed',
+			   'o.idobra=m.idobra AND m.idetiqueta=189 AND (ed.ideditora=o.ideditora) AND m.subcampo=\'a\' AND o.idobra=e.idobra AND e.idunidade='.$idUnidade.'','o.titulo', 'o.numerodaobra, o.titulo, o.idautor, o.edicao, o.localpublicacao,  ed.descricao, o.datapublicacao, m.conteudo');
+			   }
+			   else
+			   {
+			   $sql = new sql('o.numerodaobra as OBRA, o.titulo, o.idautor, o.edicao, o.localpublicacao as LOCAL, ed.descricao, o.datapublicacao as DATA, m.conteudo as CLASSIFICACAO, count(e.idexemplar) as EX', 'bt_exemplar e, bt_material m, bt_obra o,bt_editora ed',
+			   'o.idobra=m.idobra AND m.idetiqueta=189 AND (ed.ideditora=o.ideditora) AND m.subcampo=\'a\' AND o.idobra=e.idobra AND e.idunidade='.$idUnidade.' AND o.idgenero='.$idGenero.'','o.titulo', 'o.numerodaobra, o.titulo, o.idautor, o.edicao, o.localpublicacao,  ed.descricao, o.datapublicacao, m.conteudo');
 
-			}
+			   }
 
-			*/
+			 */
 
 
 
@@ -2311,7 +2339,7 @@ class BusinessBibliotecaObra extends Business
 		global $module,$MIOLO;
 		$assunto = $MIOLO->GetBusiness($module, 'assunto');
 		$query = $assunto->getCamposAssunto($idAssunto);
-			
+
 		while ( !$query->eof() )
 		{
 			$data = $query->GetRowObject();
@@ -2431,7 +2459,7 @@ class BusinessBibliotecaObra extends Business
 
 		$query = $this->Query($sql, $values);
 		return $query->result[0][0];
-    }
+	}
 
 }
 ?>
