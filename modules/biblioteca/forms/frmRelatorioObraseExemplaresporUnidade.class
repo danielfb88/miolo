@@ -20,13 +20,13 @@
 <?
 class frmRelatorioObraseExemplaresporUnidade extends Form
 {
-   	function frmRelatorioObraseExemplaresporUnidade()
-    {
-	    global $MIOLO, $action, $module, $item;
-	    
-	    $this->Form("Quantidade de Obras e Exemplares por Unidade e por Gênero");
+	function frmRelatorioObraseExemplaresporUnidade()
+	{
+		global $MIOLO, $action, $module, $item;
+
+		$this->Form("Quantidade de Obras e Exemplares por Unidade e por Gênero");
 		$this->EventHandler();
-  		$this->defaultButton = false;
+		$this->defaultButton = false;
 		// Botão 'fechar', direcionando para o handler biblioteca/main/circulacao/relatorio
 		$this->SetClose($this->manager->GetActionURL($module, 'main:circulacao:relatorio'));  		
 	}
@@ -34,42 +34,42 @@ class frmRelatorioObraseExemplaresporUnidade extends Form
 	function CreateFields()
 	{
 		global $MIOLO, $action, $module, $item, $page;
-		
+
 		$genero = $MIOLO->GetBusiness($module, 'genero');
 		$opcoes = $genero->selAll();
+
 		array_unshift($opcoes->result,'TODOS');
-		
 
-		    $fields = Array (
-				
-				new MSelection('Genero','','Gênero',$opcoes->result),
-			);
-		
-			$this->SetFields($fields);
+		$fields = 
+			array (
+					new MSelection('Genero','','Gênero',$opcoes->result),
+				  );
 
-			$buttons = Array(			
-			  new FormButton('btnRelatorio', 'Gerar Relatório', 'PDF'),
-   		    );
-			$this->SetButtons($buttons);
-			
-					
-			$this->page->onLoad("MIOLO_GetElementById('Genero').focus();");                       
-			
-		
+		$this->SetFields($fields);
+
+		$buttons = 
+			array(			
+					new FormButton('btnRelatorio', 'Gerar Relatório', 'PDF'),
+				 );
+		$this->SetButtons($buttons);
+		$this->page->onLoad("MIOLO_GetElementById('Genero').focus();");                       
 	}	
 
+	/**
+	 *  @author Daniel Bonfim 
+	 */
 	function btnRelatorio_click()
 	{
 		global $MIOLO,$module;
-		
-				
-		 $data = $this->getData();
-         
-		$ui = $MIOLO->GetUI();
-        $report = $ui->GetReport($module,'repObraseExemplaresporUnidade',$data);
-        $report->Generate();		 
-       
+
+		$data = $this->getData();
+
+		$idGenero = ($data->Genero == 0) ? null : $data->Genero;
+
+		$report = new MJasperReport( 'sigaept' );
+		$parameters[ 'int_IDGENERO' ] = $idGenero;
+
+		$report->Execute('biblioteca','RepQtdObrasExemplaresPorUnidade',$parameters);
 	}
-	
 }
 ?>

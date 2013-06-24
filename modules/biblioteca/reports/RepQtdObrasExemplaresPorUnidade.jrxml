@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepQtdObrasExemplaresPorUnidade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5a613b86-a5c9-43a7-9dd1-e54b308d84d4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="IDGENERO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+	u.descricao as unidade,
+	count(distinct(o.idobra)) as qtd_obra,
+	count(e.idexemplar) as qtd_exemplares
+
+FROM
+	bt_unidade u JOIN
+	bt_exemplar e ON (u.idunidade = e.idunidade) JOIN
+	bt_obra o ON (e.idobra = o.idobra)
+
+WHERE o.idgenero = $P{IDGENERO}
+
+GROUP BY u.descricao]]>
+	</queryString>
+	<field name="unidade" class="java.lang.String"/>
+	<field name="qtd_obra" class="java.lang.Long"/>
+	<field name="qtd_exemplares" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0e29ea3f-176f-466f-a8c2-967a426c2bd7" x="0" y="0" width="555" height="22"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de quantidade de obras e exemplares por unidade]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="6" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0604217b-1442-4961-91d1-ad9c335352df" x="0" y="0" width="270" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ad4c986-a39c-4857-9011-36978f11f5b1" x="298" y="0" width="97" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº de Obras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="748bcdb7-4eb3-4472-a32e-fedad4b5a089" x="416" y="0" width="139" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº de Exemplares]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="d83102c7-a090-49a6-bc34-148b55d3bcdd" x="3" y="20" width="552" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="c853c466-e88d-4b92-b779-f8bdca656005" x="0" y="-1" width="555" height="20" backcolor="#CFCFCF">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0) ]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9c1f1a51-76a1-42eb-9a69-05d287b9b40d" x="0" y="4" width="270" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{unidade}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d63d0d21-1c5c-437d-865d-03b338faccd5" x="298" y="4" width="97" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qtd_obra}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b502329d-a235-477d-8f1a-52618024fc5f" x="416" y="4" width="139" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qtd_exemplares}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="6" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="8" splitType="Stretch"/>
+	</summary>
+</jasperReport>

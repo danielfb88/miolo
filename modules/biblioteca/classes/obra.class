@@ -1621,7 +1621,7 @@ class BusinessBibliotecaObra extends Business
 
 		$sql .= "GROUP BY u.descricao";
 
-		$return = $this->Query($sql)->result;
+		return $this->Query($sql)->result;
 	}
 
 	function RelatorioObraeExemplaresporUnidade($Genero)

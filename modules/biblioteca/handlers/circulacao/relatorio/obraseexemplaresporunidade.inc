@@ -22,16 +22,28 @@
 $perms->CheckAccess('BIB_CIRCULACAO_TOT',A_ACCESS,true);
 
 // obter acesso as classes de Interface de Usuário
-    $ui = $MIOLO->GetUI();
+$ui = $MIOLO->GetUI();
 
 // adicionando link na barra de navegação, que aponte para o arquivo atual
 // a variável $module vem através da URL e aponta para o módulo atual 
-    $navbar->AddOption('Quantidade de Obras e Exemplares por Unidade', $module, 'main:circulacao:relatorio:obraseexemplaresporunidade');
+$navbar->AddOption('Quantidade de Obras e Exemplares por Unidade', $module, 'main:circulacao:relatorio:obraseexemplaresporunidade');
 
-	$theme->ClearContent();
-	$form = $ui->GetForm($module,'frmRelatorioObraseExemplaresporUnidade');
-	
-	$theme->InsertContent($form);
+$theme->ClearContent();
+//$form = $ui->GetForm($module,'frmRelatorioObraseExemplaresporUnidade');
+//$theme->InsertContent($form);
 
-	
+/**
+ * @author Daniel Bonfim
+ * @since 24-06-2013
+ *
+ * Até o momento, existe suporte apenas para Livro. Por isso estou removendo as
+ * opções que não serão utilizadas relacionadas a gênero e chamando o
+ * relatório apartir daqui, sem passar pelo form onde estas opções
+ * seriam selecionadas.
+ *
+ */
+$report = new MJasperReport( 'sigaept' );
+$report->Execute('biblioteca','RepQtdObrasExemplaresPorUnidade');
+
+
 ?>
