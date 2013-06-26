@@ -46,6 +46,8 @@ $Panel->AddAction('Exemplares por período e operação',$ui->GetImage($module,'
 $Panel->AddAction('Multas por período',$ui->GetImage($module,'multasperiodo_mini.png'),$module,'main:circulacao:relatorio:multasporperiodo');
 $Panel->AddAction('Quantidade de Obras e Exemplares',$ui->GetImage($module,'ocupacaovaga_mini.png'),$module,'main:circulacao:relatorio:obraseexemplaresporunidade');
 $Panel->AddAction('Relatório por Áreas de Conhecimento CNPq',$ui->GetImage($module,'cnpq_mini.png'),$module,'main:circulacao:relatorio:relatoriocnpq');
+$Panel->AddAction('Relatório de Obras por Unidade e
+Assunto',$ui->GetImage($module,'ocupacaovaga_mini.png'),$module,'main:circulacao:relatorio:obrasporunidadeassunto');
 
 
 $theme->AppendContent($Panel);

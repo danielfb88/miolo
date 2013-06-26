@@ -1621,7 +1621,58 @@ class BusinessBibliotecaObra extends Business
 
 		$sql .= "GROUP BY u.descricao";
 
-		return $this->Query($sql)->result;
+		return $this->Query(new sql($sql))->result;
+	}
+	
+	/**
+	 * Obtém as obras de livros pela unidade e pelo assunto. 
+	 *
+	 * @author Daniel Bonfim
+	 * @since 26-06-2013
+	 * 
+	 * @parameter $idUnidade integer
+	 * @parameter $assunto string
+	 * @return array
+	 */
+	function getObrasByUnidadeAndAssunto($idUnidade, $assunto) {
+		$values = array();
+
+		$sql = "
+			o.titulo, 
+			array_to_string(array_agg(distinct a.conteudo),' , ') as autor, 
+			count(e.idexemplar) as qtd_exemplares,
+			array_to_string(array_agg(distinct ass.conteudo),' , ') as assunto
+
+				FROM
+				bt_obra o JOIN
+				bt_autor a ON (o.idautor = a.idautor) JOIN
+				bt_exemplar e ON (o.idobra = e.idobra) JOIN
+				bt_genero g ON (o.idgenero = g.idgenero) JOIN
+				bt_unidade u ON (e.idunidade = u.idunidade) JOIN
+				bt_assuntoobra ao ON (o.idobra = ao.idobra) JOIN
+				bt_assunto ass ON (ao.idassunto = ass.idassunto)
+
+				WHERE 
+				g.idgenero = 1 AND ";
+
+		if ($idUnidade != 0) {
+			$sql .= "u.idunidade = ? AND ";
+			$values[] = $idUnidade;
+		}
+
+		// TODO: Problema no like com parametro
+		$sql .= "UPPER(ass.conteudo) LIKE UPPER('%?%') ";
+		$values[] = $assunto;
+
+		$sql .= "
+			GROUP BY
+			o.titulo
+
+			ORDER BY
+			o.titulo
+			";	
+
+		return $this->Query(new sql($sql), $values)->result;
 	}
 
 	function RelatorioObraeExemplaresporUnidade($Genero)
