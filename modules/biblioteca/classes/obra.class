@@ -1623,7 +1623,7 @@ class BusinessBibliotecaObra extends Business
 
 		return $this->Query(new sql($sql))->result;
 	}
-	
+
 	/**
 	 * Obtém as obras de livros pela unidade e pelo assunto. 
 	 *
@@ -1660,8 +1660,8 @@ class BusinessBibliotecaObra extends Business
 			$values[] = $idUnidade;
 		}
 
-		// TODO: Problema no like com parametro
-		$sql .= "UPPER(ass.conteudo) LIKE UPPER('%?%') ";
+		$sql .= "UPPER(ass.conteudo) LIKE UPPER(?) ";
+		$assunto = '%'. $assunto . '%';
 		$values[] = $assunto;
 
 		$sql .= "
@@ -1672,7 +1672,9 @@ class BusinessBibliotecaObra extends Business
 			o.titulo
 			";	
 
-		return $this->Query(new sql($sql), $values)->result;
+			$query = $this->Query(new sql($sql), $values);
+
+			return $query->result;
 	}
 
 	function RelatorioObraeExemplaresporUnidade($Genero)

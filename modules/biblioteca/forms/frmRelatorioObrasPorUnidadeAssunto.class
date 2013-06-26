@@ -48,9 +48,13 @@ class frmRelatorioObrasPorUnidadeAssunto extends Form
 		array_unshift($opcoes_unidades->result,'TODAS');		
 
 		echo '<pre>';
-		print_r($bussObra->getObrasByUnidadeAndAssunto(42, 'Educação'));
+		print_r($bussObra->getObrasByUnidadeAndAssunto(0, 'Educação'));
 		echo '</pre>';
 		die;
+
+		// TODO: Continuar.... 
+		// Insira text box para o assunto e gere o relatório com
+		// jasper report.
 
 		$fields = 
 			Array (
