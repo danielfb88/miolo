@@ -42,24 +42,14 @@ class frmRelatorioObrasPorUnidadeAssunto extends Form
 		global $MIOLO, $action, $module, $item, $page;
 
 		$bussUnidade = $MIOLO->GetBusiness($module, 'unidade');
-		$bussObra = $MIOLO->GetBusiness($module, 'obra');
 
 		$opcoes_unidades = $bussUnidade->selAll();
 		array_unshift($opcoes_unidades->result,'TODAS');		
 
-		echo '<pre>';
-		print_r($bussObra->getObrasByUnidadeAndAssunto(0, 'Educação'));
-		echo '</pre>';
-		die;
-
-		// TODO: Continuar.... 
-		// Insira text box para o assunto e gere o relatório com
-		// jasper report.
-
 		$fields = 
 			Array (
-					new MSelection('Unidade','','Unidade',$opcoes_unidades->result),
-					new MSelection('Genero','','Gênero',$opcoes_generos->result),
+					new MSelection('slIDUnidade','','Unidade',$opcoes_unidades->result),
+					new MTextField('txAssunto','','Assunto',40)
 				  );
 
 
@@ -67,27 +57,40 @@ class frmRelatorioObrasPorUnidadeAssunto extends Form
 
 		$buttons = 
 			Array(			
-					new FormButton('btnRelatorio', 'Gerar Relatório', 'PDF'),
+					new FormButton('btnRelatorio', 'Gerar Relatório'),
 				 );
+
 		$this->SetButtons($buttons);
-
-
 		$this->page->onLoad("MIOLO_GetElementById('Unidade').focus();");                       
-
-
 	}	
 
 	function btnRelatorio_click()
 	{
-		global $MIOLO,$module;
+		global $MIOLO, $module;
 
+		$idUnidade = $this->getFieldValue('slIDUnidade'); 
+		$assunto = $this->getFieldValue('txAssunto');
 
-		$data = $this->getData();
+		// TODO: Bug sutil aqui. Realizar testes e comparar com script
+		// em base de dados.
 
 		$ui = $MIOLO->GetUI();
-		$report = $ui->GetReport($module,'repObrasporUnidade',$data);
-		$report->Generate();		 
+		$report = new MJasperReport('sigaept');
 
+		$parameters[ 'str_ASSUNTO' ] = $assunto;
+		$reportName = null;
+
+		if (!is_null($idUnidade) && !empty($idUnidade) && 
+				$idUnidade != 0 ) { 
+			$reportName = 'repObrasPorUnidadeEAssunto';
+			$parameters[ 'int_IDUNIDADE' ] = $idUnidade;
+
+		}	else {
+			$reportName = 'repObrasPorAssunto';
+
+		}
+
+		$report->Execute('biblioteca',$reportName,$parameters);
 	}
 
 

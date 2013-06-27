@@ -1638,7 +1638,7 @@ class BusinessBibliotecaObra extends Business
 		$values = array();
 
 		$sql = "
-			o.titulo, 
+			replace(o.titulo,'/','') as titulo,
 			array_to_string(array_agg(distinct a.conteudo),' , ') as autor, 
 			count(e.idexemplar) as qtd_exemplares,
 			array_to_string(array_agg(distinct ass.conteudo),' , ') as assunto
