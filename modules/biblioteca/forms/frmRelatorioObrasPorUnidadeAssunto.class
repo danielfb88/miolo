@@ -68,28 +68,24 @@ class frmRelatorioObrasPorUnidadeAssunto extends Form
 	{
 		global $MIOLO, $module;
 
-		$idUnidade = $this->getFieldValue('slIDUnidade'); 
-		$assunto = $this->getFieldValue('txAssunto');
-
-		// TODO: Bug sutil aqui. Realizar testes e comparar com script
-		// em base de dados.
-
 		$ui = $MIOLO->GetUI();
 		$report = new MJasperReport('sigaept');
 
-		$parameters[ 'str_ASSUNTO' ] = $assunto;
-		$reportName = null;
+		$idUnidade = $this->getFieldValue('slIDUnidade'); 
+		$assunto = $this->getFieldValue('txAssunto');
 
-		if (!is_null($idUnidade) && !empty($idUnidade) && 
-				$idUnidade != 0 ) { 
+		$parameters['str_ASSUNTO'] = '%' . $assunto . '%';
+		$reportName = repObrasPorAssunto;
+
+		// Se a unidade for informada, abre o relatório
+		// 'repObrasPorUnidadeEAssunto'
+		if (!is_null($idUnidade) && !empty($idUnidade) && $idUnidade != 0 ) { 
 			$reportName = 'repObrasPorUnidadeEAssunto';
-			$parameters[ 'int_IDUNIDADE' ] = $idUnidade;
-
-		}	else {
-			$reportName = 'repObrasPorAssunto';
-
+			$parameters['int_IDUNIDADE'] = $idUnidade;
 		}
 
+		// TODO: Esta tudo bem aqui. O problema está com a acentuação
+		// do Ireport para parâmetros.
 		$report->Execute('biblioteca',$reportName,$parameters);
 	}
 
