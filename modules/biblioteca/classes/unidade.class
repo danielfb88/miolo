@@ -142,6 +142,18 @@ class BusinessBibliotecaUnidade extends Business
 		return $query->result[0][0];
 	}
 	
+	/**
+	 * Obtém o Mnemonico pelo Id
+	 * 
+	 * @author Daniel Bonfim
+	 * @since 05-07-2013
+	 */
+	function getDescricaoById($id) {
+		$sql = new sql('descricao','bt_unidade','(idunidade = ?)');
+		$query = $this->Query($sql,$id);
+		return $query->result[0][0];
+	}
+
 	function selAll()
     {
         $sql = new sql('idunidade,descricao','bt_unidade','','idunidade');

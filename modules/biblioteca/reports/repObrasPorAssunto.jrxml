@@ -40,9 +40,9 @@ ORDER BY
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="33" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="0e29ea3f-176f-466f-a8c2-967a426c2bd7" x="9" y="0" width="443" height="22"/>
+				<reportElement uuid="0e29ea3f-176f-466f-a8c2-967a426c2bd7" x="98" y="0" width="345" height="22"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -52,13 +52,6 @@ ORDER BY
 				<reportElement uuid="0454ed63-3f7b-4a30-9a38-5548cc50084b" x="453" y="2" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="412bf794-629b-472f-b696-8568d8f8d8f8" x="353" y="2" width="100" height="20"/>
-				<textElement>
-					<font pdfEncoding="Cp1252" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{ASSUNTO}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

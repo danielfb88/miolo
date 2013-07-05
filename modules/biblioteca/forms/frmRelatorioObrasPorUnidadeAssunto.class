@@ -75,17 +75,16 @@ class frmRelatorioObrasPorUnidadeAssunto extends Form
 		$assunto = $this->getFieldValue('txAssunto');
 
 		$parameters['str_ASSUNTO'] = '%' . $assunto . '%';
-		$reportName = repObrasPorAssunto;
+		$reportName = 'repObrasPorAssunto';
 
 		// Se a unidade for informada, abre o relatório
 		// 'repObrasPorUnidadeEAssunto'
 		if (!is_null($idUnidade) && !empty($idUnidade) && $idUnidade != 0 ) { 
 			$reportName = 'repObrasPorUnidadeEAssunto';
 			$parameters['int_IDUNIDADE'] = $idUnidade;
+			$parameters['str_UNIDADE'] = $MIOLO->GetBusiness($module, 'unidade')->getDescricaoById($idUnidade);
 		}
 
-		// TODO: Esta tudo bem aqui. O problema está com a acentuação
-		// do Ireport para parâmetros.
 		$report->Execute('biblioteca',$reportName,$parameters);
 	}
 
