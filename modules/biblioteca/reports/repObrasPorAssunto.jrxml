@@ -19,7 +19,7 @@ FROM
 	bt_exemplar e ON (o.idobra = e.idobra) JOIN
 	bt_genero g ON (o.idgenero = g.idgenero) JOIN
 	bt_unidade u ON (e.idunidade = u.idunidade) JOIN
-	bt_assuntoobra ao ON (o.idobra = ao.idobra) JOIN
+	bt_assuntoobra ao ON (o.idobra = ao.idobra) LEFT OUTER JOIN
 	bt_assunto ass ON (ao.idassunto = ass.idassunto)
 
 WHERE
@@ -41,15 +41,18 @@ ORDER BY
 	</background>
 	<title>
 		<band height="26" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="463ee71b-a01b-4143-9587-ebca240e1107" x="3" y="2" width="551" height="21" backcolor="#CCCCCC"/>
+			</rectangle>
 			<staticText>
-				<reportElement uuid="0e29ea3f-176f-466f-a8c2-967a426c2bd7" x="98" y="0" width="345" height="22"/>
+				<reportElement uuid="0e29ea3f-176f-466f-a8c2-967a426c2bd7" x="98" y="4" width="345" height="22"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Relatório de Obras por Assunto]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement uuid="0454ed63-3f7b-4a30-9a38-5548cc50084b" x="453" y="2" width="100" height="20"/>
+				<reportElement uuid="0454ed63-3f7b-4a30-9a38-5548cc50084b" x="453" y="6" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
@@ -96,18 +99,13 @@ ORDER BY
 	<detail>
 		<band height="38" splitType="Stretch">
 			<rectangle>
-				<reportElement uuid="c853c466-e88d-4b92-b779-f8bdca656005" x="0" y="0" width="555" height="38" backcolor="#CFCFCF">
+				<reportElement uuid="501132e8-fad5-4fe1-894b-fa88ebcfde5f" x="3" y="-2" width="550" height="40" backcolor="#F0F0FA">
 					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
-					<pen lineWidth="0.0"/>
+					<pen lineWidth="0.0" lineStyle="Double"/>
 				</graphicElement>
 			</rectangle>
-			<textField isBlankWhenNull="true">
-				<reportElement uuid="664f7969-a31a-4358-82b7-aa0b2c0547ac" x="326" y="2" width="48" height="36"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{qtd_exemplares}]]></textFieldExpression>
-			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement uuid="a9e0cb8f-ecc7-4bb6-a34c-4ad96771965e" x="2" y="2" width="138" height="36"/>
 				<textElement/>
@@ -122,6 +120,11 @@ ORDER BY
 				<reportElement uuid="b94bc93a-446d-42aa-b12d-ff72989f4b3a" x="393" y="2" width="157" height="36"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{assunto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="664f7969-a31a-4358-82b7-aa0b2c0547ac" x="318" y="1" width="48" height="36"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qtd_exemplares}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
