@@ -109,7 +109,14 @@ public class MJasper {
 						parametros.put(nomePar, new Double(param));
 					} else if (prefixo.equalsIgnoreCase("tsp_")) {
 						String dataStr = param.substring(2,4) + "/" + param.substring(0,2) + "/" + param.substring(4,8);
-						parametros.put(nomePar, new Date(dataStr));
+					/**
+					 *  Modificação para aceitar parâmetro data já formatado.
+					 *
+					 *  @author Daniel Bonfim
+					 *  @since 07-07-2013
+					 */
+					} else if (prefixo.equalsIgnoreCase("dta_")) {
+						parametros.put(nomePar, new Date(param));
 					} else if (prefixo.equalsIgnoreCase("boo_")) {
 						if (param.equalsIgnoreCase("1")) {
 							parametros.put(nomePar, new Boolean(true));
