@@ -20,12 +20,12 @@
 <?
 $perms->CheckAccess('BIB_CIRCULACAO_TOT',A_ACCESS,true);
 
- 
-    $ui = $MIOLO->GetUI();
+
+$ui = $MIOLO->GetUI();
 
 // adicionando link na barra de navegação, que aponte para o arquivo atual
 // a variável $module vem através da URL e aponta para o módulo atual 
-    $navbar->AddOption('Relatórios', $module, 'main:circulacao:relatorio');
+$navbar->AddOption('Relatórios', $module, 'main:circulacao:relatorio');
 
 $theme->ClearContent();
 //$theme->InsertContent(new ContentHeader('Módulo','Biblioteca: Circulação'));
@@ -47,8 +47,9 @@ $Panel->AddAction('Multas por período',$ui->GetImage($module,'multasperiodo_min
 $Panel->AddAction('Quantidade de Obras e Exemplares',$ui->GetImage($module,'ocupacaovaga_mini.png'),$module,'main:circulacao:relatorio:obraseexemplaresporunidade');
 $Panel->AddAction('Relatório por Áreas de Conhecimento CNPq',$ui->GetImage($module,'cnpq_mini.png'),$module,'main:circulacao:relatorio:relatoriocnpq');
 $Panel->AddAction('Relatório de Obras por Unidade e
-Assunto',$ui->GetImage($module,'ocupacaovaga_mini.png'),$module,'main:circulacao:relatorio:obrasporunidadeassunto');
-
+		Assunto',$ui->GetImage($module,'ocupacaovaga_mini.png'),$module,'main:circulacao:relatorio:obrasporunidadeassunto');
+$Panel->AddAction('Relatório de Obras
+		Catalogadas',$ui->GetImage($module,'ocupacaovaga_mini.png'),$module,'main:circulacao:relatorio:obrasCatalogadas'); 
 
 $theme->AppendContent($Panel);
 $handled = $MIOLO->InvokeHandler($module, 'circulacao/relatorio/' . $context->ShiftAction());
